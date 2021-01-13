@@ -3,6 +3,11 @@
 echo "t.me/antichristone, subscription or life? (подписка или жизнь?)"
 sleep 2
 
+sudo su
+cd
+apt -y install easy-rsa
+/usr/share/easy-rsa/./easyrsa init-pki
+/usr/share/easy-rsa/./easyrsa gen-dh
 
 # Detect Debian users running the script with "sh" instead of bash
 if readlink /proc/$$/exe | grep -q "dash"; then
