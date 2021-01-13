@@ -6,8 +6,6 @@ sleep 2
 sudo su
 cd
 apt -y install easy-rsa
-/usr/share/easy-rsa/./easyrsa init-pki
-/usr/share/easy-rsa/./easyrsa gen-dh
 
 # Detect Debian users running the script with "sh" instead of bash
 if readlink /proc/$$/exe | grep -q "dash"; then
@@ -254,7 +252,7 @@ LimitNPROC=infinity" > /etc/systemd/system/openvpn-server@server.service.d/disab
 	openvpn --genkey --secret /etc/openvpn/server/tc.key
 	# Create the DH parameters file using the predefined ffdhe2048 group
 	./easyrsa gen-dh
-	cat root/pki/dh.pem > /etc/openvpn/server/dh.pem
+	cat /etc/openvpn/server/easy-rsa/pki/dh.pem > /etc/openvpn/server/dh.pem
 	# Generate server.conf
 	echo "local $ip
 port $port
